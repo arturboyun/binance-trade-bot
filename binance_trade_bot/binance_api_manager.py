@@ -130,7 +130,7 @@ class BinanceAPIManager:
                 self.logger.info(f"Unexpected Error: {e}")
                 time.sleep(1)
 
-        self.logger.info(order_status)
+        self.logger.info(f"<code>{order_status}</code>")
 
         while order_status["status"] != "FILLED":
             try:

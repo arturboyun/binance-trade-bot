@@ -77,10 +77,11 @@ class AutoTrader:
 
         session: Session
         with self.db.db_session() as session:
+            self.logger.info(f"Initializing pairs")
             for pair in session.query(Pair).filter(Pair.ratio.is_(None)).all():
                 if not pair.from_coin.enabled or not pair.to_coin.enabled:
                     continue
-                self.logger.info(f"Initializing {pair.from_coin} vs {pair.to_coin}")
+                self.logger.info(f"Initializing {pair.from_coin} vs {pair.to_coin}", telegram_highlight=False)
 
                 from_coin_price = all_tickers.get_price(pair.from_coin + self.config.BRIDGE)
                 if from_coin_price is None:
